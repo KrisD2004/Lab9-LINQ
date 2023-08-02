@@ -20,8 +20,10 @@ namespace Lab9_LINQ
             Part2WithLINQ(locations);
 
             Part3WithLINQ(locations);
-
+              
             Part4WithLINQ(locations);
+
+            Part5(locations);
 
 
 
@@ -118,6 +120,66 @@ namespace Lab9_LINQ
                     Console.WriteLine(neighborhood);
                 }
             
+        }
+
+        public static void Part5(Location[] items)
+        {
+            //Part 1 as a Method
+            //phone a friend:
+            var neighborHoodQuery1 = from item in items
+                                     group item by item.properties.neighborhood into grouped
+                                     select new { Key = grouped.Key, Value = grouped.Count() };
+            //Kelsee:
+
+            var neighborHoodQueryOne = items
+                .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood))
+                .GroupBy(item => item.properties.neighborhood)
+                .Select(grouped => new { Key = grouped.Key, Value = grouped.Count() });
+
+
+            //Part 2 as a Method
+            //phone a friend:
+            var neighborHoodQuery2 = from item in items
+                                     where item.properties.neighborhood != ""
+                                     select item;
+            //Console.WriteLine("SYNTAX QUERY - SELECT ITEM\n");
+            foreach (var neighborhood in neighborHoodQuery2)
+            {
+                //  Console.WriteLine("X: {0}, Y: {1} ", neighborhood.geometry.coordinates[0], neighborhood.geometry.coordinates[1]);
+            }
+            //Console.WriteLine();
+            //BIGGOUDAJOE - wow
+            //Console.WriteLine("METHOD QUERY - SELECT ITEM.PROPERTIES.NEIGHBORHOOD\n");
+            var neighborhoodQueryTwo = items
+                .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood));
+
+            foreach (var neighborhood in neighborhoodQueryTwo)
+            {
+                // Console.WriteLine("X: {0}, Y: {1} ", neighborhood.geometry.coordinates[0], neighborhood.geometry.coordinates[1]);
+            }
+
+
+            //Part 4 as a Query
+            //phone a friend:
+            var neighborhoodQuery4 = items
+                                    .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood))
+                                    .Select(item => item.properties.neighborhood)
+                                    .Distinct();
+
+            /*"coordinates": [
+            -73.986212,
+					40.715775
+				]
+            */
+            var newQuery = (from item in items
+                            where (item.properties.neighborhood != "" && item.properties.neighborhood != null)
+                            && ((item.geometry.coordinates[0] == -73.986212)
+                            && (item.geometry.coordinates[1] == 40.715775))
+                            select item.properties.neighborhood);
+            foreach (var item in newQuery)
+            {
+                Console.WriteLine(item);
+            }
         }
 
     }
