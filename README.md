@@ -1,6 +1,6 @@
 
 # Lab9_LINQ Readme
-Summary
+## Summary
 This project is a C# program that utilizes LINQ (Language-Integrated Query) to work with location data stored in a JSON file. The program reads the JSON file, deserializes it into C# objects, and performs various LINQ queries to analyze the data and provide useful information about locations, neighborhoods, and their appearances in the dataset.
 
 Visuals
