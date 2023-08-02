@@ -125,11 +125,9 @@ namespace Lab9_LINQ
         public static void Part5(Location[] items)
         {
             //Part 1 as a Method
-            //phone a friend:
             var neighborHoodQuery1 = from item in items
                                      group item by item.properties.neighborhood into grouped
                                      select new { Key = grouped.Key, Value = grouped.Count() };
-            //Kelsee:
 
             var neighborHoodQueryOne = items
                 .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood))
@@ -138,7 +136,6 @@ namespace Lab9_LINQ
 
 
             //Part 2 as a Method
-            //phone a friend:
             var neighborHoodQuery2 = from item in items
                                      where item.properties.neighborhood != ""
                                      select item;
@@ -148,7 +145,6 @@ namespace Lab9_LINQ
                 //  Console.WriteLine("X: {0}, Y: {1} ", neighborhood.geometry.coordinates[0], neighborhood.geometry.coordinates[1]);
             }
             //Console.WriteLine();
-            //BIGGOUDAJOE - wow
             //Console.WriteLine("METHOD QUERY - SELECT ITEM.PROPERTIES.NEIGHBORHOOD\n");
             var neighborhoodQueryTwo = items
                 .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood));
@@ -160,7 +156,6 @@ namespace Lab9_LINQ
 
 
             //Part 4 as a Query
-            //phone a friend:
             var neighborhoodQuery4 = items
                                     .Where(item => !string.IsNullOrEmpty(item.properties.neighborhood))
                                     .Select(item => item.properties.neighborhood)
